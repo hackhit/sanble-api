@@ -2261,7 +2261,24 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _layouts_Session__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../layouts/Session */ "./resources/js/layouts/Session.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_Session__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../layouts/Session */ "./resources/js/layouts/Session.vue");
+/* harmony import */ var _util_services_API__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/services/API */ "./resources/js/util/services/API.js");
+/* harmony import */ var _util_errors_formatErrorsForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/errors/formatErrorsForm */ "./resources/js/util/errors/formatErrorsForm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2304,11 +2321,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 // Layout
+ // Service
+
+ // Utils
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App-Auth-Login-Page",
   components: {
-    Layout: _layouts_Session__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Layout: _layouts_Session__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2324,8 +2345,48 @@ __webpack_require__.r(__webpack_exports__);
         min: function min(v) {
           return v.length >= 6 || "Minimo 6 caracteres";
         }
-      }
+      },
+      errors: null,
+      isLoading: false
     };
+  },
+  methods: {
+    handleSubmit: function handleSubmit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var service;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.isLoading = true;
+                _this.errors = null;
+                service = new _util_services_API__WEBPACK_IMPORTED_MODULE_2__["default"]();
+                _context.next = 5;
+                return service.login(_this.user).then(function (res) {
+                  console.log(res);
+                  console.log(res.response);
+                })["catch"](function (err) {
+                  if (err.response.status == 422) {
+                    _this.errors = Object(_util_errors_formatErrorsForm__WEBPACK_IMPORTED_MODULE_3__["default"])(err.response.data.errors);
+                  } else if (err.response.status == 401) {
+                    console.log(err.response);
+                  } else {
+                    _this.errors = ["Unknown error"];
+                  }
+                })["finally"](function () {
+                  return _this.isLoading = false;
+                });
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   }
 });
 
@@ -2344,6 +2405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _layouts_Session__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../layouts/Session */ "./resources/js/layouts/Session.vue");
 /* harmony import */ var _util_services_API__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/services/API */ "./resources/js/util/services/API.js");
+/* harmony import */ var _util_errors_formatErrorsForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/errors/formatErrorsForm */ "./resources/js/util/errors/formatErrorsForm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2420,8 +2482,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 // Layout
  // Service
+
+ // Utils
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2451,7 +2523,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: function email(v) {
           return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(v) || "Ingrese un correo electrónico válido";
         }
-      }
+      },
+      errors: null
     };
   },
   methods: {
@@ -2465,18 +2538,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this.isLoading = true;
+                _this.errors = null;
+
+                if (!(_this.user.password != _this.user.confirmPassword)) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _this.errors = ["The password does not match"];
+                _this.isLoading = false;
+                _context.next = 10;
+                break;
+
+              case 7:
                 service = new _util_services_API__WEBPACK_IMPORTED_MODULE_2__["default"]();
-                _context.next = 4;
+                _context.next = 10;
                 return service.signup(_this.user).then(function (res) {
                   console.log(res);
                   console.log(res.response);
                 })["catch"](function (err) {
-                  console.log(err);
+                  if (err.response.status == 422) {
+                    _this.errors = Object(_util_errors_formatErrorsForm__WEBPACK_IMPORTED_MODULE_3__["default"])(err.response.data.errors);
+                  } else {
+                    _this.errors = ["Unknown error"];
+                  }
                 })["finally"](function () {
                   return _this.isLoading = false;
                 });
 
-              case 4:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -4922,6 +5012,14 @@ var render = function() {
             [
               _c(
                 "v-form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.handleSubmit($event)
+                    }
+                  }
+                },
                 [
                   _c(
                     "v-container",
@@ -4931,6 +5029,7 @@ var render = function() {
                           label: "Usuario",
                           rules: [_vm.rules.required],
                           color: "primary",
+                          disabled: _vm.isLoading,
                           required: ""
                         },
                         model: {
@@ -4951,6 +5050,7 @@ var render = function() {
                             ? "mdi-eye"
                             : "mdi-eye-off",
                           color: "primary",
+                          disabled: _vm.isLoading,
                           required: ""
                         },
                         on: {
@@ -4968,12 +5068,45 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c(
+                        "v-alert",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.errors,
+                              expression: "errors"
+                            }
+                          ],
+                          attrs: { type: "error" }
+                        },
+                        [
+                          _c(
+                            "ul",
+                            _vm._l(_vm.errors, function(error, i) {
+                              return _c("li", { key: i }, [
+                                _vm._v(_vm._s(error))
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "div",
                         { staticClass: "my-2 text-center" },
                         [
                           _c(
                             "v-btn",
-                            { attrs: { color: "primary", width: "200" } },
+                            {
+                              attrs: {
+                                color: "primary",
+                                width: "200",
+                                type: "submit",
+                                loading: _vm.isLoading
+                              }
+                            },
                             [_vm._v("Iniciar Sesión")]
                           )
                         ],
@@ -5073,7 +5206,7 @@ var render = function() {
                           label: "Usuario",
                           rules: [_vm.rules.required],
                           color: "primary",
-                          required: ""
+                          disabled: _vm.isLoading
                         },
                         model: {
                           value: _vm.user.username,
@@ -5089,6 +5222,7 @@ var render = function() {
                           label: "Nombre y Apellido",
                           rules: [_vm.rules.required],
                           color: "primary",
+                          disabled: _vm.isLoading,
                           required: ""
                         },
                         model: {
@@ -5105,6 +5239,7 @@ var render = function() {
                           label: "Correo electrónico",
                           rules: [_vm.rules.required, _vm.rules.email],
                           color: "primary",
+                          disabled: _vm.isLoading,
                           type: "email",
                           required: ""
                         },
@@ -5126,6 +5261,7 @@ var render = function() {
                             ? "mdi-eye"
                             : "mdi-eye-off",
                           color: "primary",
+                          disabled: _vm.isLoading,
                           required: ""
                         },
                         on: {
@@ -5151,6 +5287,7 @@ var render = function() {
                             ? "mdi-eye"
                             : "mdi-eye-off",
                           color: "primary",
+                          disabled: _vm.isLoading,
                           required: ""
                         },
                         on: {
@@ -5166,6 +5303,32 @@ var render = function() {
                           expression: "user.confirmPassword"
                         }
                       }),
+                      _vm._v(" "),
+                      _c(
+                        "v-alert",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.errors,
+                              expression: "errors"
+                            }
+                          ],
+                          attrs: { type: "error" }
+                        },
+                        [
+                          _c(
+                            "ul",
+                            _vm._l(_vm.errors, function(error, i) {
+                              return _c("li", { key: i }, [
+                                _vm._v(_vm._s(error))
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -5198,7 +5361,8 @@ var render = function() {
                               attrs: {
                                 color: "primary",
                                 width: "200",
-                                type: "submit"
+                                type: "submit",
+                                loading: _vm.isLoading
                               }
                             },
                             [_vm._v("Registrarse")]
@@ -63928,6 +64092,38 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 /***/ }),
 
+/***/ "./resources/js/util/errors/formatErrorsForm.js":
+/*!******************************************************!*\
+  !*** ./resources/js/util/errors/formatErrorsForm.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var formatErrorsForm = function formatErrorsForm(errors) {
+  var keys = Object.keys(errors);
+  var arrayErrors = [];
+
+  var _loop = function _loop(i) {
+    var stringErrors = "";
+    errors[keys[i]].map(function (error) {
+      stringErrors = stringErrors + " " + error;
+    });
+    arrayErrors.push(stringErrors);
+  };
+
+  for (var i = 0; i < keys.length; i++) {
+    _loop(i);
+  }
+
+  return arrayErrors;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (formatErrorsForm);
+
+/***/ }),
+
 /***/ "./resources/js/util/services/API.js":
 /*!*******************************************!*\
   !*** ./resources/js/util/services/API.js ***!
@@ -63957,8 +64153,12 @@ var API = /*#__PURE__*/function () {
   _createClass(API, [{
     key: "signup",
     value: function signup(user) {
-      console.log(user);
       return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("".concat(this.URL, "/auth/signup"), user);
+    }
+  }, {
+    key: "login",
+    value: function login(user) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("".concat(this.URL, "/auth/login"), user);
     }
   }]);
 

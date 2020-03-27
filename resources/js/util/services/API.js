@@ -6,8 +6,11 @@ class API {
     }
 
     signup(user) {
-        console.log(user);
         return axios.post(`${this.URL}/auth/signup`, user);
+    }
+
+    login(user) {
+        return axios.post(`${this.URL}/auth/login`, user);
     }
 }
 
