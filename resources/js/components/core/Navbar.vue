@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :clipped-left="false" fixed app dense>
+  <v-app-bar :clipped-left="false" fixed app dense color="primary" dark>
     <v-app-bar-nav-icon @click.stop="handleShowDrawer" />
     <!-- <v-btn icon>
       <v-icon>mdi-application</v-icon>

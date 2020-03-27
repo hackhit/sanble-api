@@ -1,8 +1,11 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import "quickand";
 
 // Variables
 @import "variables";
 
+// Styles
+@import "styles.scss";
+
 // Vuetify
-@import "~vuetify/dist/vuetify.min.css";
+@import "vuetify.scss";

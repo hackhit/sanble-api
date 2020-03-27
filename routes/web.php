@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('storage/avatars/{archivo}', 'StorageController@getAvatar');
 
-Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/{any}', 'AppController@index')->where('any', '.*');

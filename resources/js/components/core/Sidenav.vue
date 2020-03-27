@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="toggleDrawer" fixed app>
+  <v-navigation-drawer v-model="toggleDrawer" fixed app color="primary" dark>
     <v-list>
       <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
         <v-list-item-action>
@@ -15,33 +15,33 @@
 
 <script>
 // Vuex
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-  name: 'Sidenav',
+  name: "Sidenav",
   data() {
     return {
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
+          icon: "mdi-apps",
+          title: "Welcome",
+          to: "/"
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: "mdi-chart-bubble",
+          title: "Inspire",
+          to: "/inspire"
         }
       ],
       toggleDrawer: false
-    }
+    };
   },
   watch: {
     toggleDrawer(val, oldVal) {
-      this.$store.dispatch('showDrawerAction', val)
+      this.$store.dispatch("showDrawerAction", val);
     },
     showDrawer(val, oldVal) {
-      this.toggleDrawer = val
+      this.toggleDrawer = val;
     }
   },
   computed: {
@@ -49,5 +49,5 @@ export default {
       showDrawer: state => state.showDrawer
     })
   }
-}
+};
 </script>

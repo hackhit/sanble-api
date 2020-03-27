@@ -8,7 +8,7 @@
     <title>Sanble</title>
 
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/material-icons/material-icons.css') }}">
 
 </head>
 

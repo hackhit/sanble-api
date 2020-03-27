@@ -55,10 +55,10 @@
 
 <script>
 // Layout
-import Layout from "../layouts/default";
+import Layout from "../layouts/Dashboard";
 
 export default {
-  name: "Index-Page",
+  name: "App-Index-Page",
   components: {
     Layout
   }
