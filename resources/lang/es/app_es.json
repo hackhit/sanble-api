@@ -1,0 +1,25 @@
+{
+    "auth": {
+        "wrongUsernamePassword": "Usuario o contraseña incorrecto"
+    },
+    "input": {
+        "username": "Usuario",
+        "nameUser": "Nombre y Apellido",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña"
+    },
+    "btn": {
+        "login": "Iniciar Sesión",
+        "register": "Registrarse",
+        "alreadyHaveAccount": "Ya poseo una cuenta"
+    },
+    "rules": {
+        "required": "Campo requerido",
+        "min6Char": "Minimo 6 caracteres",
+        "emailValid": "Ingrese un correo electrónico valido"
+    },
+    "sidenav": {
+        "home": "Inicio"
+    }
+}

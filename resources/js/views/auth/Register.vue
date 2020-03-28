@@ -10,14 +10,14 @@
         <v-form @submit.prevent="handleSubmit">
           <v-container>
             <v-text-field
-              label="Usuario"
+              :label="$t('input.username')"
               :rules="[rules.required]"
               color="primary"
               v-model="user.username"
               :disabled="isLoading"
             ></v-text-field>
             <v-text-field
-              label="Nombre y Apellido"
+              :label="$t('input.nameUser')"
               :rules="[rules.required]"
               color="primary"
               v-model="user.name"
@@ -25,7 +25,7 @@
               required
             ></v-text-field>
             <v-text-field
-              label="Correo electrónico"
+              :label="$t('input.email')"
               :rules="[rules.required, rules.email]"
               color="primary"
               v-model="user.email"
@@ -34,10 +34,10 @@
               required
             ></v-text-field>
             <v-text-field
-              label="Contraseña"
+              :label="$t('input.password')"
               :rules="[rules.required, rules.min]"
               :type="showPassword ? 'text' : 'password'"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :append-icon="showPassword ? 'visibility' : 'visibility_off'"
               @click:append="showPassword = !showPassword"
               color="primary"
               v-model="user.password"
@@ -45,10 +45,10 @@
               required
             ></v-text-field>
             <v-text-field
-              label="Confirmar contraseña"
+              :label="$t('input.confirmPassword')"
               :rules="[rules.required, rules.min]"
               :type="showConfirmPassword ? 'text' : 'password'"
-              :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :append-icon="showConfirmPassword ? 'visibility' : 'visibility_off'"
               @click:append="showConfirmPassword = !showConfirmPassword"
               color="primary"
               v-model="user.confirmPassword"
@@ -64,10 +64,21 @@
               <v-progress-circular indeterminate color="primary"></v-progress-circular>
             </div>
             <div class="my-2 text-center">
-              <v-btn color="primary" width="200" type="submit" :loading="isLoading">Registrarse</v-btn>
+              <v-btn
+                color="primary"
+                width="200"
+                type="submit"
+                :loading="isLoading"
+              >{{$t('btn.register')}}</v-btn>
             </div>
             <div class="my-2 text-center">
-              <v-btn link to="/app/auth/login" width="200" text small>Ya poseo una cuenta</v-btn>
+              <v-btn
+                link
+                to="/app/auth/login"
+                width="200"
+                text
+                small
+              >{{$t('btn.alreadyHaveAccount')}}</v-btn>
             </div>
           </v-container>
         </v-form>
@@ -104,15 +115,26 @@ export default {
       showPassword: false,
       showConfirmPassword: false,
       rules: {
-        required: value => !!value || "Campo Requerido",
-        min: v => v.length >= 6 || "Minimo 6 caracteres",
+        required: value => !!value || this.rulesRequired,
+        min: v => v.length >= 6 || this.min6Char,
         email: v =>
           /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
             v
-          ) || "Ingrese un correo electrónico válido"
+          ) || this.emailValid
       },
       errors: null
     };
+  },
+  computed: {
+    rulesRequired() {
+      return this.$t("rules.required");
+    },
+    min6Char() {
+      return this.$t("rules.min6Char");
+    },
+    emailValid() {
+      return this.$t("rules.emailValid");
+    }
   },
   methods: {
     async handleSubmit() {

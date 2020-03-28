@@ -1,0 +1,25 @@
+{
+    "auth": {
+        "wrongUsernamePassword": "Wrong username or password"
+    },
+    "input": {
+        "username": "Username",
+        "nameUser": "Name and surname",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+    },
+    "btn": {
+        "login": "Log in",
+        "register": "Sign Up",
+        "alreadyHaveAccount": "I already have an account"
+    },
+    "rules": {
+        "required": "Required field",
+        "min6Char": "Min 6 characters",
+        "emailValid": "Enter a valid email address"
+    },
+    "sidenav": {
+        "home": "Home"
+    }
+}

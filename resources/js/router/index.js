@@ -3,6 +3,9 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// Guard
+import authGuard from "./guards/authGuard";
+
 // Layout Router
 import Router from "../layouts/Router.vue";
 
@@ -28,12 +31,22 @@ const router = new VueRouter({
                     meta: {
                         title: "Dashboard | Sanble"
                     },
+                    beforeEnter: authGuard,
                     component: Index
                 },
                 // Auth
                 {
+                    path: "login",
+                    redirect: () => {
+                        return "/app/auth/login";
+                    }
+                },
+                {
                     path: "auth",
                     component: Router,
+                    redirect: () => {
+                        return "/app/auth/login";
+                    },
                     children: [
                         {
                             path: "login",
@@ -54,6 +67,18 @@ const router = new VueRouter({
                     ]
                 }
             ]
+        },
+        {
+            path: "/login",
+            redirect: () => {
+                return "/app/auth/login";
+            }
+        },
+        {
+            path: "/auth",
+            redirect: () => {
+                return "/app/auth/login";
+            }
         }
     ]
 });

@@ -1,12 +1,17 @@
 import Vue from "vue";
 import Vuetify from "vuetify";
 import colors from "vuetify/es5/util/colors";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 
 Vue.use(Vuetify);
 
+let darkMode = false;
+if (localStorage.getItem("darkMode"))
+    darkMode = localStorage.getItem("darkMode") == "true" ? true : false;
+
 const opts = {
     theme: {
-        dark: false,
+        dark: darkMode,
         themes: {
             dark: {
                 primary: "#FF7315",
@@ -27,6 +32,9 @@ const opts = {
                 success: colors.green.accent3
             }
         }
+    },
+    icons: {
+        iconfont: "md"
     }
 };
 

@@ -6,11 +6,19 @@ class API {
     }
 
     signup(user) {
-        return axios.post(`${this.URL}/auth/signup`, user);
+        return axios.post(`${this.URL}/auth/signup`, user, {
+            headers: {
+                "Accept-Language": "es"
+            }
+        });
     }
 
     login(user) {
-        return axios.post(`${this.URL}/auth/login`, user);
+        return axios.post(`${this.URL}/auth/login`, user, {
+            headers: {
+                "Accept-Language": "es"
+            }
+        });
     }
 }
 

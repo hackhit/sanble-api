@@ -3,9 +3,7 @@
     <Navbar />
     <Sidenav />
     <slot />
-    <v-footer fixed app>
-      <span>Sanble &copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <Footer :dark="false" />
   </v-app>
 </template>
 
@@ -13,12 +11,14 @@
 // Components
 import Navbar from "../components/core/Navbar";
 import Sidenav from "../components/core/Sidenav";
+import Footer from "../components/core/Footer";
 
 export default {
   name: "Default-Layout",
   components: {
     Navbar,
-    Sidenav
+    Sidenav,
+    Footer
   },
   data() {
     return {

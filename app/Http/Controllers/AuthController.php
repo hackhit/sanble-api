@@ -13,39 +13,39 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware("auth:api", ["except" => ["login", "signup"]]);
     }
 
     public function signup(Request $request)
     {
         $validateData = $request->validate([
-            'username' => 'required|min:3|unique:users',
-            'name' => 'required|min:3',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6'
+            "username" => "required|min:3|unique:users",
+            "name" => "required|min:3",
+            "email" => "required|email|max:255|unique:users",
+            "password" => "required|min:6"
         ]);
 
-        $role = Role::where('name', "=", 'basic')->first();
+        $role = Role::where("name", "=", "basic")->first();
 
         $newUser = new User();
         $newUser->uuid = (string) Str::uuid();
-        $newUser->username = $validateData['username'];
-        $newUser->name = $validateData['name'];
-        $newUser->email = $validateData['email'];
-        $newUser->password = bcrypt($validateData['password']);
+        $newUser->username = $validateData["username"];
+        $newUser->name = $validateData["name"];
+        $newUser->email = $validateData["email"];
+        $newUser->password = bcrypt($validateData["password"]);
         $newUser->save();
 
         $newUser->roles()->attach($role->id);
 
-        $user = User::where('id', "=", $newUser->id)->with('roles')->first();
+        $user = User::where("id", "=", $newUser->id)->with("roles")->first();
 
         $for = $user->email;
         $data = [
             "name" => $user->name
         ];
-        Mail::send('emails.welcome', $data, function ($msg) use ($for) {
+        Mail::send("emails.welcome", $data, function ($msg) use ($for) {
             $msg->from("info@sanble.com.ve", "Sanble");
-            $msg->subject('Bienvenido a Sanble');
+            $msg->subject("Bienvenido a Sanble");
             $msg->to($for);
         });
 
@@ -54,13 +54,13 @@ class AuthController extends Controller
 
     public function login()
     {
-        $credentials = request(['username', 'password']);
+        $credentials = request(["username", "password"]);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(["error" => "Unauthorized"], 401);
         }
 
-        $user = User::where('uuid', "=", auth()->user()->uuid)->with('roles')->first();
+        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->first();
 
         $response = [
             "data" => $user,
@@ -74,7 +74,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(["message" => "Successfully logged out"]);
     }
 
     public function refresh()
@@ -85,9 +85,9 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            "access_token" => $token,
+            "token_type" => "bearer",
+            "expires_in" => auth()->factory()->getTTL() * 60
         ]);
     }
 }

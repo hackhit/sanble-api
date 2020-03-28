@@ -3,12 +3,19 @@
     <div class="layout--container">
       <slot />
     </div>
+    <Footer :dark="true" />
   </v-app>
 </template>
 
 <script>
+// Component
+import Footer from "../components/core/Footer";
+
 export default {
-  name: "Session-Layout"
+  name: "Session-Layout",
+  components: {
+    Footer
+  }
 };
 </script>
 
