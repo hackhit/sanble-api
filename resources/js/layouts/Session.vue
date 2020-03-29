@@ -1,9 +1,9 @@
 <template>
-  <v-app dark>
+  <v-app>
     <div class="layout--container">
       <slot />
     </div>
-    <Footer :dark="true" />
+    <Footer :dark="true" :toggleDarkMode="true" />
   </v-app>
 </template>
 

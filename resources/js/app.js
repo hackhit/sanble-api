@@ -12,14 +12,14 @@ import router from "./router";
 import store from "./store";
 
 // initializePreferences
-import InitializePreferencesStore from "./util/InitializePreferencesStore";
+import InitializePreferencesStore from "./utils/InitializePreferencesStore";
 InitializePreferencesStore(store);
 
 // Vuetify
-import vuetify from "./plugins/vuetify";
+import vuetify from "./utils/plugins/vuetify";
 
 // Vue-I18n
-import i18n from "./plugins/vue-i18n";
+import i18n from "./utils/plugins/vue-i18n";
 
 // App
 import App from "./App";

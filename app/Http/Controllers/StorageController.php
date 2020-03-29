@@ -18,4 +18,15 @@ class StorageController extends Controller
 
         abort(404);
     }
+    function getMedia($file)
+    {
+        $public_path = public_path();
+        $url = $public_path . '/storage/media/' . $file;
+
+        if (Storage::exists($file)) {
+            return response()->download($url);
+        }
+
+        abort(404);
+    }
 }

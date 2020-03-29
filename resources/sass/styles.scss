@@ -1,12 +1,33 @@
+// Body
+// body {
+//     overflow-y: auto;
+// }
+// body::-webkit-scrollbar {
+//     width: 10px;
+// }
+// body::-webkit-scrollbar-track {
+//     background: #646464;
+// }
+// body::-webkit-scrollbar-thumb {
+//     background: #4e4e4e;
+// }
+// body::-webkit-scrollbar-thumb:hover {
+//     background: #888;
+// }
+
 // Auth
 .container--logo-auth {
     background-color: var(--sanble-gray);
-    padding: 40px 0;
+    padding: 10px 0;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
 
     .figure--logo-auth {
         text-align: center;
         color: #fff;
+
+        img {
+            width: 80px;
+        }
     }
 }

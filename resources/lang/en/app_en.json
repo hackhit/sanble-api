@@ -12,7 +12,8 @@
     "btn": {
         "login": "Log in",
         "register": "Sign Up",
-        "alreadyHaveAccount": "I already have an account"
+        "alreadyHaveAccount": "I already have an account",
+        "close": "Close"
     },
     "rules": {
         "required": "Required field",
@@ -21,5 +22,9 @@
     },
     "sidenav": {
         "home": "Home"
+    },
+    "text": {
+        "logOutModal": "Do you want to log out ?",
+        "logOut": "Log out"
     }
 }

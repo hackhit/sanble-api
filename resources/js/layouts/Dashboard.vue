@@ -3,7 +3,7 @@
     <Navbar />
     <Sidenav />
     <slot />
-    <Footer :dark="false" />
+    <Footer :dark="false" :toggleDarkMode="false" />
   </v-app>
 </template>
 

@@ -3,7 +3,7 @@
     <v-card width="500">
       <div class="container--logo-auth">
         <figure class="figure--logo-auth">
-          <h1>InserteLogo</h1>
+          <img src="/storage/media/logo.png" alt="Sanble" />
         </figure>
       </div>
       <v-container>

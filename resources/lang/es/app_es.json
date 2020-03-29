@@ -12,7 +12,8 @@
     "btn": {
         "login": "Iniciar Sesión",
         "register": "Registrarse",
-        "alreadyHaveAccount": "Ya poseo una cuenta"
+        "alreadyHaveAccount": "Ya poseo una cuenta",
+        "close": "Cerrar"
     },
     "rules": {
         "required": "Campo requerido",
@@ -21,5 +22,9 @@
     },
     "sidenav": {
         "home": "Inicio"
+    },
+    "text": {
+        "logOutModal": "¿Desea cerrar sesión?",
+        "logOut": "Cerrar sesión"
     }
 }

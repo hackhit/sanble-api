@@ -4,8 +4,8 @@ import VueI18n from "vue-i18n";
 Vue.use(VueI18n);
 
 // Lang
-import es from "../../lang/es/app_es.json";
-import en from "../../lang/en/app_en.json";
+import es from "../../../lang/es/app_es.json";
+import en from "../../../lang/en/app_en.json";
 
 const messages = {
     en,

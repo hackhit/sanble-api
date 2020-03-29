@@ -21,7 +21,7 @@
 
 .container--logo-auth {
   background-color: var(--sanble-gray);
-  padding: 40px 0;
+  padding: 10px 0;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
 }
@@ -29,6 +29,10 @@
 .container--logo-auth .figure--logo-auth {
   text-align: center;
   color: #fff;
+}
+
+.container--logo-auth .figure--logo-auth img {
+  width: 80px;
 }
 
 #app {
