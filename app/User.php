@@ -7,27 +7,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use App\Role;
-
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        "name", "email", "password",
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'id'
+        "password", "remember_token", "id", "pivot"
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        "email_verified_at" => "datetime",
     ];
 
     public function username()
     {
-        return 'username';
+        return "username";
     }
 
     public function getJWTIdentifier()
@@ -42,6 +40,21 @@ class User extends Authenticatable implements JWTSubject
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class)->withTimestamps();
+        return $this->belongsToMany("App\Role");
+    }
+
+    public function fairs()
+    {
+        return $this->hasMany("App\Fair");
+    }
+
+    public function favorite_fairs()
+    {
+        return $this->belongsToMany("App\Fair", "favorite_user_fair");
+    }
+
+    public function favorite_stands()
+    {
+        return $this->belongsToMany("App\Stand", "favorite_user_stand");
     }
 }

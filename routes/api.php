@@ -29,4 +29,6 @@ Route::prefix('v1')->group(function () {
         Route::post('logout', 'AuthController@logout');
         Route::post('refresh', 'AuthController@refresh');
     });
+
+    Route::get('test', 'AppController@test');
 });

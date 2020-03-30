@@ -4,8 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\User;
-
 class Role extends Model
 {
     /**
@@ -14,11 +12,11 @@ class Role extends Model
      * @var array
      */
     protected $hidden = [
-        'updated_at', 'id', 'pivot'
+        "updated_at", "id", "pivot"
     ];
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany("App\User");
     }
 }

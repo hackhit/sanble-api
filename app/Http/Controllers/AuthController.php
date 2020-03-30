@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+// use Mail;
 
 use App\User;
 use App\Role;
@@ -60,7 +61,7 @@ class AuthController extends Controller
             return response()->json(["error" => "Unauthorized"], 401);
         }
 
-        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->first();
+        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->with("fairs")->first();
 
         $response = [
             "data" => $user,
