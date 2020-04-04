@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 // Guard
 import authGuard from "./guards/authGuard";
+import routesSessionGuard from "./guards/routesSessionGuard";
 
 // Layout Router
 import Router from "../layouts/Router.vue";
@@ -13,8 +14,9 @@ import Router from "../layouts/Router.vue";
 // Auth
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register.vue";
+import Congratulations from "../views/auth/Congratulations.vue";
 // Dashboard
-import Index from "../views/Index.vue";
+import Home from "../views/Home.vue";
 
 const router = new VueRouter({
     mode: "history",
@@ -32,7 +34,7 @@ const router = new VueRouter({
                         title: "Dashboard | Sanble"
                     },
                     beforeEnter: authGuard,
-                    component: Index
+                    component: Home
                 },
                 // Auth
                 {
@@ -51,6 +53,7 @@ const router = new VueRouter({
                         {
                             path: "login",
                             name: "app-auth-login",
+                            beforeEnter: routesSessionGuard,
                             meta: {
                                 title: "Iniciar Sesión | Sanble"
                             },
@@ -58,11 +61,27 @@ const router = new VueRouter({
                         },
                         {
                             path: "register",
-                            name: "app-auth-register",
-                            meta: {
-                                title: "Registrarse | Sanble"
-                            },
-                            component: Register
+                            component: Router,
+                            children: [
+                                {
+                                    path: "",
+                                    name: "app-auth-register",
+                                    beforeEnter: routesSessionGuard,
+                                    meta: {
+                                        title: "Registrarse | Sanble"
+                                    },
+                                    component: Register
+                                },
+                                {
+                                    path: "congratulations",
+                                    name: "app-auth-congratulations",
+                                    beforeEnter: routesSessionGuard,
+                                    meta: {
+                                        title: "Felicitaciones | Sanble"
+                                    },
+                                    component: Congratulations
+                                }
+                            ]
                         }
                     ]
                 }

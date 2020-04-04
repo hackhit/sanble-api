@@ -92,13 +92,13 @@
 import Layout from "../../layouts/Session";
 
 // Service
-import API from "../../util/services/API";
+import API from "../../utils/services/API";
 
 // Utils
-import formatErrorsForm from "../../util/errors/formatErrorsForm";
+import formatErrorsForm from "../../utils/errors/formatErrorsForm";
 
 export default {
-  name: "App-Auth-Register-Page",
+  name: "Auth-Register-Page",
   components: {
     Layout
   },
@@ -145,8 +145,8 @@ export default {
         this.errors = ["The password does not match"];
         this.isLoading = false;
       } else {
-        const service = new API();
-        await service
+        const services = new API();
+        await services
           .signup(this.user)
           .then(res => {
             console.log(res);

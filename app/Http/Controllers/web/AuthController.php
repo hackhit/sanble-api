@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -61,7 +62,7 @@ class AuthController extends Controller
             return response()->json(["error" => "Unauthorized"], 401);
         }
 
-        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->with("fairs")->first();
+        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->first();
 
         $response = [
             "data" => $user,
@@ -81,6 +82,19 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
+    }
+
+    public function checkToken()
+    {
+        $user = User::where("uuid", "=", auth()->user()->uuid)->with("roles")->first();
+        $token = auth()->tokenById($user->id);
+
+        $response = [
+            "data" => $user,
+            "meta" => $this->respondWithToken($token)->original
+        ];
+
+        return response()->json($response);
     }
 
     protected function respondWithToken($token)

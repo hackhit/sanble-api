@@ -1,7 +1,7 @@
 <template>
   <div class="toggleWrapper">
     <input type="checkbox" class="absolute dn" v-model="toggle.toggle" id="dn" />
-    <label for="dn" class="toggle">
+    <label for="dn" class="toggle" :class="{toggleColorDayFooter:footerToggle}">
       <span class="toggle__handler">
         <span class="crater crater--1"></span>
         <span class="crater crater--2"></span>
@@ -20,11 +20,14 @@
 <script>
 export default {
   name: "ToggleDarkMode",
-  props: ["toggle"]
+  props: ["toggle", "footerToggle"]
 };
 </script>
 
 <style scoped lang="scss">
+.toggleColorDayFooter {
+  background-color: #ff7315 !important;
+}
 .toggleWrapper {
   margin-left: 5px;
   input {
@@ -41,7 +44,7 @@ export default {
     width: 42px;
     // width: 45px;
     height: 20px;
-    background-color: #73bce6;
+    background-color: #ffb889;
     border-radius: 84px;
     transition: background-color 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   }

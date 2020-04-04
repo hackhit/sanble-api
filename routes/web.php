@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('storage/avatars/{archivo}', 'StorageController@getAvatar');
 Route::get('storage/media/{archivo}', 'StorageController@getMedia');
 
-Route::get('/{any}', 'AppController@index')->where('any', '.*');
+Route::get('/{any}', 'web\AppController@index')->where('any', '.*');

@@ -58,7 +58,7 @@
 import Layout from "../layouts/Dashboard";
 
 export default {
-  name: "App-Index-Page",
+  name: "Home-Page",
   components: {
     Layout
   }

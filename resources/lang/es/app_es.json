@@ -21,10 +21,16 @@
         "emailValid": "Ingrese un correo electrónico valido"
     },
     "sidenav": {
-        "home": "Inicio"
+        "home": "Inicio",
+        "invitations": "Invitaciones",
+        "favorites": "Favoritos",
+        "fairs": "Ferias",
+        "stands": "Stands",
+        "mysanble": "Mi Sanble"
     },
     "text": {
         "logOutModal": "¿Desea cerrar sesión?",
-        "logOut": "Cerrar sesión"
+        "logOut": "Cerrar sesión",
+        "profile": "Profile"
     }
 }

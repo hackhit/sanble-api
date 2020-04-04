@@ -7,18 +7,15 @@ import store from "../../store";
 // Services API
 import API from "../../utils/services/API";
 
-const redirectToLogin = next => {
+const cleanDataUser = next => {
     cookies.remove("access-token");
     store.dispatch("setUserAction", null);
     store.dispatch("setRolesAction", null);
     store.dispatch("setTokenAction", null);
-    next({
-        path: "/app/auth/login",
-        replace: true
-    });
+    next();
 };
 
-const authGuard = async (to, from, next) => {
+const routesSessionGuard = async (to, from, next) => {
     document.title = to.meta.title;
 
     if (!store.state.accessToken) {
@@ -34,18 +31,23 @@ const authGuard = async (to, from, next) => {
                     store.dispatch("setUserAction", data.data);
                     store.dispatch("setRolesAction", data.data.roles);
                     store.dispatch("setTokenAction", data.meta.access_token);
-                    next();
+                    next({
+                        path: "/app",
+                        replace: true
+                    });
                 })
-                .catch(err => {
-                    console.log(err);
-                    redirectToLogin(next);
+                .catch(() => {
+                    cleanDataUser(next);
                 });
         } else {
-            redirectToLogin(next);
+            cleanDataUser(next);
         }
     } else {
-        next();
+        next({
+            path: "/app",
+            replace: true
+        });
     }
 };
 
-export default authGuard;
+export default routesSessionGuard;

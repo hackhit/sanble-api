@@ -55,14 +55,14 @@
 // Layout
 import Layout from "../../layouts/Session";
 
-// Service
-import API from "../../util/services/API";
+// Services
+import API from "../../utils/services/API";
 
 // Utils
-import formatErrorsForm from "../../util/errors/formatErrorsForm";
+import formatErrorsForm from "../../utils/errors/formatErrorsForm";
 
 export default {
-  name: "App-Auth-Login-Page",
+  name: "Auth-Login-Page",
   components: {
     Layout
   },
@@ -94,8 +94,8 @@ export default {
       this.isLoading = true;
       this.errors = null;
 
-      const service = new API();
-      await service
+      const services = new API();
+      await services
         .login(this.user)
         .then(({ data }) => {
           this.$cookies.set("access-token", data.meta.access_token);

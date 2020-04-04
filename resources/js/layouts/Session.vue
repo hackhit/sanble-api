@@ -3,7 +3,7 @@
     <div class="layout--container">
       <slot />
     </div>
-    <Footer :dark="true" :toggleDarkMode="true" />
+    <Footer :dark="true" :footerToggle="true" />
   </v-app>
 </template>
 

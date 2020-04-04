@@ -4,8 +4,8 @@
     <div class="footer--select-lang">
       <v-select :items="lang" v-model="langSelect" @input="handleSelectLang"></v-select>
     </div>
-    <div v-if="toggleDarkMode">
-      <ToggleDarkMode :toggle="darkMode" />
+    <div v-if="footerToggle">
+      <ToggleDarkMode :toggle="darkMode" :footerToggle="footerToggle?footerToggle:null" />
     </div>
   </v-footer>
 </template>
@@ -16,7 +16,7 @@ import ToggleDarkMode from "./ToggleDarkMode";
 
 export default {
   name: "Footer",
-  props: ["dark", "toggleDarkMode"],
+  props: ["dark", "footerToggle"],
   components: {
     ToggleDarkMode
   },

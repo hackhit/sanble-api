@@ -2,10 +2,21 @@
   <v-app-bar :clipped-left="false" fixed app dense color="primary" dark>
     <v-app-bar-nav-icon @click.stop="handleShowDrawer" />
 
-    <v-toolbar-title v-text="'Sanble'" />
-    <!-- <v-toolbar-title>
-      <img src="/storage/media/logo_horizontal_light.png" alt="Sanble" />
-    </v-toolbar-title>-->
+    <!-- <v-toolbar-title v-text="'Sanble'" /> -->
+    <v-toolbar-title>
+      <img src="/storage/media/logo_light.png" height="30" alt="Sanble" style="margin-top:5px" />
+    </v-toolbar-title>
+    <v-text-field
+      class="navbar--input-search"
+      height="30px"
+      width="50px"
+      placeholder="Buscar..."
+      dense
+      flat
+      solo-inverted
+      prepend-inner-icon="search"
+      :hide-details="true"
+    ></v-text-field>
     <v-spacer />
     <ToggleDarkMode :toggle="darkMode" />
 
@@ -16,6 +27,10 @@
         </v-btn>
       </template>
       <v-list>
+        <v-list-item to="/profile">
+          <v-icon>person</v-icon>
+          <v-list-item-title>{{ $t('text.profile') }}</v-list-item-title>
+        </v-list-item>
         <v-list-item @click="showCloseSession = true">
           <v-icon>exit_to_app</v-icon>
           <v-list-item-title>{{ $t('text.logOut') }}</v-list-item-title>
@@ -28,9 +43,7 @@
         <v-card-title>{{ $t('text.logOutModal') }}</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-
           <v-btn color="red darken-1" text @click="showCloseSession = false">{{ $t('btn.close') }}</v-btn>
-
           <v-btn color="primary" @click="handleExit">{{ $t('text.logOut') }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -86,3 +99,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.navbar--input-search {
+  height: 30px;
+  width: 70px;
+  margin-left: 20px !important;
+
+  .v-input__control {
+    min-height: 30px !important;
+
+    .v-icon {
+      margin-top: 0 !important;
+    }
+  }
+}
+</style>

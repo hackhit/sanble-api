@@ -4,7 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 // Utils
-import convertArrayToString from "../util/convertArrayToString";
+import convertArrayToString from "../utils/convertArrayToString";
 
 export default new Vuex.Store({
     state: {
