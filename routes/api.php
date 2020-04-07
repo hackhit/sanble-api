@@ -21,13 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('web')->group(function () {
     Route::prefix('v1')->group(function () {
         Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-            Route::post('signup', 'web\AuthController@signup');
-            Route::post('login', 'web\AuthController@login');
-            Route::post('logout', 'web\AuthController@logout');
-            Route::post('refresh', 'web\AuthController@refresh');
-            Route::post('check', 'web\AuthController@checkToken');
+            Route::post('signup', 'AuthController@signup');
+            Route::post('login', 'AuthController@login');
+            Route::post('logout', 'AuthController@logout');
+            Route::post('refresh', 'AuthController@refresh');
+            Route::post('check', 'AuthController@checkToken');
         });
 
-        Route::get('test', 'AppController@test');
+        Route::group(['middleware' => 'api'], function ($router) {
+            Route::resource('fairs', 'FairsController');
+        });
     });
 });

@@ -27,4 +27,9 @@ class Fair extends Model
             'location', 'lat', 'long',
         ]);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany("App\ReviewFair");
+    }
 }

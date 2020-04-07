@@ -18,15 +18,40 @@ class UserTableSeeder extends Seeder
         $roleStand = Role::where("name", "=", "stand")->first();
         $roleFair = Role::where("name", "=", "fair")->first();
 
-        $user = new User();
-        $user->username = "prueba";
-        $user->name = "Prueba Probando";
-        $user->email = "prueba@prueba.com";
-        $user->password = bcrypt("123123123");
-        $user->save();
+        $master = new User();
+        $master->username = "master";
+        $master->name = "Usuario Maestro";
+        $master->email = "master@prueba.com";
+        $master->password = bcrypt("123123123");
+        $master->save();
+        $master->roles()->attach($roleBasic->id);
+        $master->roles()->attach($roleStand->id);
+        $master->roles()->attach($roleFair->id);
 
-        $user->roles()->attach($roleBasic->id);
-        $user->roles()->attach($roleStand->id);
-        $user->roles()->attach($roleFair->id);
+        $basic = new User();
+        $basic->username = "basic";
+        $basic->name = "Usuario Básico";
+        $basic->email = "basic@prueba.com";
+        $basic->password = bcrypt("123123123");
+        $basic->save();
+        $basic->roles()->attach($roleBasic->id);
+
+        $stand = new User();
+        $stand->username = "stand";
+        $stand->name = "Usuario Stand";
+        $stand->email = "stand@prueba.com";
+        $stand->password = bcrypt("123123123");
+        $stand->save();
+        $stand->roles()->attach($roleBasic->id);
+        $stand->roles()->attach($roleStand->id);
+
+        $fair = new User();
+        $fair->username = "fair";
+        $fair->name = "Usuario Feria";
+        $fair->email = "fair@prueba.com";
+        $fair->password = bcrypt("123123123");
+        $fair->save();
+        $fair->roles()->attach($roleBasic->id);
+        $fair->roles()->attach($roleFair->id);
     }
 }
