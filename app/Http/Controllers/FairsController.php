@@ -20,11 +20,19 @@ class FairsController extends Controller
      */
     public function index()
     {
-        $fairs = Fair::where("is_active", "=", true)->with("reviews")->get()->map(function ($fair) {
+        $fairs = Fair::where("is_active", "=", true)->with("reviews")->with("photographies")->get()->map(function ($fair) {
             $totalStars = 0;
+            $stars = 0;
+            if (count($fair->reviews) > 0) {
+                for ($i = 0; $i < count($fair->reviews); $i++) {
+                    $totalStars = $totalStars + $fair->reviews[$i]->start;
+                }
+                $stars = round($totalStars / count($fair->reviews), 2);
+            }
 
-            for ($i = 0; $i < count($fair->reviews); $i++) {
-                $totalStars = $totalStars + $fair->reviews[$i]->start;
+            $photograpy = null;
+            if (count($fair->photographies) > 0) {
+                $photograpy = $fair->photographies[0]->url_photo;
             }
 
             return [
@@ -37,11 +45,13 @@ class FairsController extends Controller
                 "location" => $fair->location,
                 "lat" => $fair->lat,
                 "long" => $fair->long,
+                "type" => $fair->type,
                 "start_date" => $fair->start_date,
                 "end_date" => $fair->end_date,
                 "created_at" => $fair->created_at,
                 "updated_at" => $fair->updated_at,
-                "stars" => round($totalStars / count($fair->reviews), 2),
+                "photograpy" => $photograpy,
+                "stars" => $stars,
             ];
         });
         return $fairs;
