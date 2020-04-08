@@ -48,7 +48,6 @@ class FairsController extends Controller
             ],
         ];
 
-
         return $response;
     }
 
