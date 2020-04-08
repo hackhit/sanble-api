@@ -20,41 +20,36 @@ class FairsController extends Controller
      */
     public function index()
     {
-        $fairs = Fair::where("is_active", "=", true)->with("reviews")->with("photographies")->get()->map(function ($fair) {
+        $fairs = Fair::where("is_active", "=", true)->with("reviews")->with("photographies")->paginate(5);
+
+        for ($i = 0; $i < count($fairs->items()); $i++) {
             $totalStars = 0;
             $stars = 0;
-            if (count($fair->reviews) > 0) {
-                for ($i = 0; $i < count($fair->reviews); $i++) {
-                    $totalStars = $totalStars + $fair->reviews[$i]->start;
+            if (count($fairs->items()[$i]->reviews) > 0) {
+                for ($j = 0; $j < count($fairs->items()[$i]->reviews); $j++) {
+                    $totalStars = $totalStars + $fairs->items()[$i]->reviews[$j]->start;
                 }
-                $stars = round($totalStars / count($fair->reviews), 2);
+                $stars = round($totalStars / count($fairs->items()[$i]->reviews), 2);
             }
+            $fairs->items()[$i]->stars = $stars;
+        }
 
-            $photograpy = null;
-            if (count($fair->photographies) > 0) {
-                $photograpy = $fair->photographies[0]->url_photo;
-            }
+        $length_pagination = ceil($fairs->total() / $fairs->perPage());
 
-            return [
-                "uuid" => $fair->uuid,
-                "name" => $fair->name,
-                "description" => $fair->description,
-                "email" => $fair->email,
-                "phone" => $fair->phone,
-                "is_active" => $fair->is_active,
-                "location" => $fair->location,
-                "lat" => $fair->lat,
-                "long" => $fair->long,
-                "type" => $fair->type,
-                "start_date" => $fair->start_date,
-                "end_date" => $fair->end_date,
-                "created_at" => $fair->created_at,
-                "updated_at" => $fair->updated_at,
-                "photograpy" => $photograpy,
-                "stars" => $stars,
-            ];
-        });
-        return $fairs;
+        $response = [
+            "data" => $fairs->items(),
+            "pagination" => [
+                "length_pagination" => $length_pagination,
+                "current_page" => $fairs->currentPage(),
+                "total" => $fairs->total(),
+                "per_page" => $fairs->perPage(),
+                "next_page_url" => $fairs->nextPageUrl(),
+                "prev_page_url" => $fairs->previousPageUrl(),
+            ],
+        ];
+
+
+        return $response;
     }
 
     /**
