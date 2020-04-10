@@ -29,7 +29,7 @@ Route::prefix('web')->group(function () {
         });
 
         Route::group(['middleware' => 'api'], function ($router) {
-            Route::resource('fairs', 'FairsController');
+            Route::post('fairs', 'FairsController@index');
         });
     });
 });

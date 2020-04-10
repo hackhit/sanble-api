@@ -18,9 +18,26 @@ class FairsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fairs = Fair::where("is_active", "=", true)->with("reviews")->with("photographies")->paginate(5);
+        $fairs = [];
+
+        if ($request->search && $request->search == true) {
+            if ($request->input) {
+                $fairs = Fair::where("is_active", "=", true)
+                    ->where("name", "like", "%" . $request->input . "%")
+                    ->orWhere("description", "like", "%" . $request->input . "%")
+                    ->orWhere("location", "like", "%" . $request->input . "%")
+                    ->with("reviews")->with("photographies")->paginate(5);
+            }
+            if ($request->type) {
+                $fairs = Fair::where("is_active", "=", true)
+                    ->where("type", "=", $request->type)
+                    ->with("reviews")->with("photographies")->paginate(5);
+            }
+        } else {
+            $fairs = Fair::where("is_active", "=", true)->with("reviews")->with("photographies")->paginate(5);
+        }
 
         for ($i = 0; $i < count($fairs->items()); $i++) {
             $totalStars = 0;
@@ -49,71 +66,5 @@ class FairsController extends Controller
         ];
 
         return $response;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
