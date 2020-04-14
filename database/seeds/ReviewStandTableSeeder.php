@@ -20,7 +20,7 @@ class ReviewStandTableSeeder extends Seeder
 
         $reviewStand = new ReviewStand();
         $reviewStand->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
-        $reviewStand->start = 3;
+        $reviewStand->stars = 4;
         $reviewStand->user_id = $user->id;
         $reviewStand->stand_id = $stand->id;
         $reviewStand->save();

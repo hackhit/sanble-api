@@ -28,6 +28,7 @@ class FairTableSeeder extends Seeder
         $fair1->location = "El Poblado, Porlamar 6301, Nueva Esparta";
         $fair1->lat = "10.9655553";
         $fair1->long = "-63.8608029";
+        $fair1->stars = 3;
         $fair1->user_id = $user1->id;
         $fair1->save();
 
@@ -41,6 +42,7 @@ class FairTableSeeder extends Seeder
         $fair2->location = "Porlamar 6301, Nueva Esparta";
         $fair2->lat = "10.9655553";
         $fair2->long = "-63.8608029";
+        $fair2->stars = 3.33;
         $fair2->user_id = $user2->id;
         $fair2->save();
 

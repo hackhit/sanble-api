@@ -26,6 +26,7 @@ class CreateFairsTable extends Migration
             $table->mediumText('location');
             $table->string('lat');
             $table->string('long');
+            $table->float('stars')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

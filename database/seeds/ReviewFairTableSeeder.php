@@ -23,30 +23,30 @@ class ReviewFairTableSeeder extends Seeder
 
         $reviewFair1 = new ReviewFair();
         $reviewFair1->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
-        $reviewFair1->start = 3;
+        $reviewFair1->stars = 3;
         $reviewFair1->user_id = $user1->id;
         $reviewFair1->fair_id = $fair1->id;
         $reviewFair1->save();
 
-        $reviewFair2 = new ReviewFair();
-        $reviewFair2->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
-        $reviewFair2->start = 4;
-        $reviewFair2->user_id = $user1->id;
-        $reviewFair2->fair_id = $fair2->id;
-        $reviewFair2->save();
+        $reviewFair2_1 = new ReviewFair();
+        $reviewFair2_1->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
+        $reviewFair2_1->stars = 4;
+        $reviewFair2_1->user_id = $user1->id;
+        $reviewFair2_1->fair_id = $fair2->id;
+        $reviewFair2_1->save();
 
-        $reviewFair3 = new ReviewFair();
-        $reviewFair3->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
-        $reviewFair3->start = 5;
-        $reviewFair3->user_id = $user2->id;
-        $reviewFair3->fair_id = $fair2->id;
-        $reviewFair3->save();
+        $reviewFair2_2 = new ReviewFair();
+        $reviewFair2_2->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
+        $reviewFair2_2->stars = 5;
+        $reviewFair2_2->user_id = $user2->id;
+        $reviewFair2_2->fair_id = $fair2->id;
+        $reviewFair2_2->save();
 
-        $reviewFair4 = new ReviewFair();
-        $reviewFair4->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
-        $reviewFair4->start = 1;
-        $reviewFair4->user_id = $user3->id;
-        $reviewFair4->fair_id = $fair2->id;
-        $reviewFair4->save();
+        $reviewFair2_3 = new ReviewFair();
+        $reviewFair2_3->comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo tortor, a efficitur felis.";
+        $reviewFair2_3->stars = 1;
+        $reviewFair2_3->user_id = $user3->id;
+        $reviewFair2_3->fair_id = $fair2->id;
+        $reviewFair2_3->save();
     }
 }

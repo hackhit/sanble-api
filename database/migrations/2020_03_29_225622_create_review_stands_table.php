@@ -17,7 +17,7 @@ class CreateReviewStandsTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->mediumText('comment')->nullable();
-            $table->integer('start')->default(0);
+            $table->integer('stars')->default(0);
             $table->timestamps();
 
             $table->unsignedInteger('user_id');

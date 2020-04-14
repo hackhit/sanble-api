@@ -20,6 +20,7 @@ class CreateStandsTable extends Migration
             $table->mediumText('slogan');
             $table->string('url_photo')->nullable();
             $table->longText('description');
+            $table->float('stars')->default(0);
             $table->timestamps();
 
             $table->unsignedInteger('user_id');
