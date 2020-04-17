@@ -18,7 +18,8 @@ class PhotographyTableSeeder extends Seeder
 
         $photography = new Photography();
         $photography->fair_id = $fair->id;
-        $photography->url_photo = "/storage/fairs/example.jpg";
+        $photography->cover = true;
+        $photography->url_photo = "http://localhost:8000/storage/fairs/example.jpg";
         $photography->save();
     }
 }

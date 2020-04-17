@@ -18,6 +18,7 @@ class CreatePhotographiesTable extends Migration
             $table->uuid('uuid')->unique();
             $table->longText('description')->nullable();
             $table->string('url_photo');
+            $table->boolean('cover')->default(false);
             $table->timestamps();
 
             $table->unsignedInteger('fair_id');

@@ -31,6 +31,7 @@ Route::prefix('web')->group(function () {
         Route::group(['middleware' => 'api'], function ($router) {
             // Fairs
             Route::post('fairs', 'FairsController@index');
+            Route::get('fairs/{uuid}', 'FairsController@show');
             // Stands
             Route::post('stands', 'StandsController@index');
         });

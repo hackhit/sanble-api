@@ -39,6 +39,22 @@ class FairsController extends Controller
             $fairs = Fair::where("is_active", "=", true)->with("photographies")->paginate(5);
         }
 
+        if (count(($fairs))) {
+            $fairs->map(function ($fair) {
+                $photography = $fair->photographies->map(function ($photography) {
+                    if ($photography->cover) {
+                        return $photography;
+                    }
+                });
+
+                if (count($photography)) {
+                    $fair->photography = $photography[0];
+                } else {
+                    $fair->photography = null;
+                }
+            });
+        }
+
         $length_pagination = ceil($fairs->total() / $fairs->perPage());
 
         $response = [
@@ -54,5 +70,24 @@ class FairsController extends Controller
         ];
 
         return $response;
+    }
+
+    public function show(Request $request, $uuid)
+    {
+        $fair = Fair::where("is_active", "=", true)->where("uuid", "=", $uuid)->with("photographies")->first();
+
+        $fairPhotography = null;
+
+        if (count($fair->photographies)) {
+            $fairPhotography = $fair->photographies->map(function ($photography) {
+                if ($photography->cover) {
+                    return $photography;
+                }
+            });
+        }
+
+        $fair->photography = $fairPhotography[0];
+
+        return $fair;
     }
 }
